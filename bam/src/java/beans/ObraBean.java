@@ -1,6 +1,5 @@
 package beans;
 
-import dados.dao.AutorDAO;
 import dados.dao.EditoraDAO;
 import dados.dao.TipoObraDAO;
 import dados.entidade.Autor;
@@ -9,8 +8,11 @@ import dados.entidade.Obra;
 import dados.entidade.TipoObra;
 import exception.AlertaException;
 import exception.ErroException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import negocio.AutorBO;
@@ -41,15 +43,23 @@ public class ObraBean extends BeanAbstrato implements Serializable {
         }
     }
 
-    public String abrirFormConsulta() {
-        return TELA_PRINCIPAL;
+    public void abrirFormConsulta() {
+        try {
+            redireciona(TELA_PRINCIPAL);
+        } catch (IOException ex) {
+            Logger.getLogger(ObraBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public String abrirFormInclusao() {
-        return TELA_INCLUSAO_OBRA;
+    public void abrirFormInclusao() {
+        try {
+            redireciona(TELA_INCLUSAO_OBRA);
+        } catch (IOException ex) {
+            Logger.getLogger(ObraBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public String consultar() {
+    public void consultar() {
         try {
             obras = ObraBO.getInstance().consultarObraPorExemplo(obra);
         } catch (AlertaException alerta) {
@@ -57,7 +67,7 @@ public class ObraBean extends BeanAbstrato implements Serializable {
         } catch (Exception e) {
             adicionaMensagemErro(new ErroException(e.getMessage()));
         }
-        return abrirFormConsulta();
+        abrirFormConsulta();
     }
 
     public List<Editora> getEditoras() {

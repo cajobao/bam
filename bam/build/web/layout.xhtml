@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Biblioteca Assis do Machado</title>
+        <style type="text/css">
+            body {
+                background-color: #eeeeee; 
+                font-size: 12px
+            }
+            .div-botoes{
+                background    :#f7f7f7;
+                border-top    :1px dashed #ccc;
+                border-bottom :1px dashed #ccc;
+                margin-top    :20px;
+                padding       :5px;
+                text-align    :right;
+
+            }
+            .div-botoes > *{
+                margin-left: 78%;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <div align="center">
+            <p:layout style="min-width:1020px;max-width:1020px;min-height:600px">  
+                <!--                <p:layoutUnit position="north" size="100">  
+                                    <h:graphicImage url="/tema/imagens/topo.jpg" />
+                                </p:layoutUnit>  -->
+                <p:layoutUnit position="center" size="100">  
+                    <ui:insert name="menu">
+                        <h:form>  
+                            <p:menubar>
+                                <p:submenu label="Cadastro" rendered="#{loginBean.usuarioLogado != null}">
+                                    <p:menuitem value="Manter Autor" action="#{autorBean.abrirFormConsulta()}" />
+                                    <p:menuitem value="Manter Editora" action="#"/>
+                                    <p:menuitem value="Manter Obras" action="#"/>
+                                    <p:menuitem value="Manter Novas Obras" action="#"/>
+                                </p:submenu>
+                                <p:submenu label="Emprestimo" rendered="#{loginBean.usuarioLogado != null}">
+                                    <p:menuitem value="Consultar" url="#" />
+                                    <p:menuitem value="Novo" url="#"/>
+                                    <p:menuitem value="Reserva" url="#" />
+                                </p:submenu>
+                                <p:submenu label="Obras">
+                                    <p:menuitem value="Consultar" action="#{obraBean.abrirFormConsulta()}" />
+                                </p:submenu>
+                                <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginBean.sair()}" rendered="#{loginBean.usuarioLogado != null}"/>
+                                <p:menuitem value="Entrar" icon="ui-icon-open" url="/publico/login.xhtml" rendered="#{loginBean.usuarioLogado == null}"/>
+                            </p:menubar>
+                            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                        </h:form>
+                    </ui:insert>
+                    <ui:insert name="centro">
+
+                    </ui:insert>
+                </p:layoutUnit>  
+            </p:layout>  
+        </div>
+    </h:body>
+</html>

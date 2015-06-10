@@ -5,8 +5,11 @@ import dados.entidade.Autor;
 import exception.AlertaException;
 import exception.ErroException;
 import exception.InfoException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import negocio.AutorBO;
@@ -26,14 +29,22 @@ public class AutorBean extends BeanAbstrato implements Serializable {
 
     }
 
-    public String abrirFormInclusao() {
+    public void abrirFormInclusao() {
         limpar();
-        return TELA_INCLUSAO_AUTOR;
+        try {
+            redireciona(TELA_INCLUSAO_AUTOR);
+        } catch (IOException ex) {
+            Logger.getLogger(AutorBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public String abrirFormConsulta() {
+    public void abrirFormConsulta() {
         limpar();
-        return TELA_CONSULTA_AUTOR;
+        try {
+            redireciona(TELA_CONSULTA_AUTOR);
+        } catch (IOException ex) {
+            Logger.getLogger(AutorBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void salvar() {

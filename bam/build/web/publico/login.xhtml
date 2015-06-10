@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Biblioteca Assis do Machado</title>
+        <style type="text/css">
+            body {
+                background-color: #eeeeee; 
+                font-size: 12px;
+            }
+            .form-login{
+                position: fixed;
+                top: 45%;
+                left: 45%;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:messages id="messages" autoUpdate="true" showDetail="true" closable="false" />
+            <div class="form-login">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Usuario: "/>
+                    <h:inputText id="nome"
+                                 size="20"
+                                 maxlength="20"
+                                 value="#{loginBean.usuario.nmUsuario}"/>
+                    <h:outputLabel value="Senha: "/>
+                    <h:inputSecret id="senha"
+                                   size="20"
+                                   maxlength="20"
+                                   value="#{loginBean.usuario.dsSenha}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2">
+                    <h:commandButton value="Entrar" action="#{loginBean.autenticar()}"/>
+                    <h:commandButton value="Limpar" action="#{loginBean.limpar()}"/>
+                </h:panelGrid>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

@@ -56,7 +56,7 @@ public class LoginBean extends BeanAbstrato implements Serializable {
         } catch (GenericaException g) {
             adicionaMensagemErro(new ErroException(g.getMessage()));
         } catch (Exception e) {
-            
+            adicionaMensagemErro(new ErroException(e.getMessage()));
         }
     }
 

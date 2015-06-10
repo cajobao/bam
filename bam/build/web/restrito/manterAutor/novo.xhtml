@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:decorate template="/layout.xhtml">
+        <ui:define name="centro">
+            <h4>Incluir</h4>
+            <h:form>
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="Nome: "/>
+                    <h:inputText id="nome"
+                                 size="20"
+                                 maxlength="50"
+                                 value="#{autorBean.autor.nmAutor}"
+                                 required="true"
+                                 requiredMessage="O campo nome é obrigatório !"/>
+                </h:panelGrid>
+                <div class="div-botoes">
+                    <h:panelGrid columns="3">
+                        <h:commandButton value="Cadastrar" action="#{autorBean.salvar()}"/>
+                        <h:commandButton value="Limpar" action="#{autorBean.limpar()}"/>
+                        <h:commandButton value="Voltar" action="manterAutor/consultar"/>
+                    </h:panelGrid>
+                </div>
+                <c:if test="#{autorBean.autores.size() > 0}">
+                    <p:dataTable id="lista" var="aut" value="#{autorBean.autores}" emptyMessage="Nenhum registro encontrado" >
+                        <p:column headerText="Nome">#{aut.nmAutor}</p:column>
+                    </p:dataTable>
+                </c:if>
+            </h:form>
+        </ui:define>
+    </ui:decorate>
+</html>

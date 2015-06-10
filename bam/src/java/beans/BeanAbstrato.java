@@ -22,10 +22,10 @@ public abstract class BeanAbstrato {
     protected static final String TELA_PRINCIPAL = "/bam/publico/consultarObras.xhtml";
     protected static final String TELA_LOGIN = "/bam/publico/login.xhtml";
 
-    protected static final String TELA_CONSULTA_AUTOR = "/restrito/manterAutor/consulta";
-    protected static final String TELA_INCLUSAO_AUTOR = "/restrito/manterAutor/novo";
+    protected static final String TELA_CONSULTA_AUTOR = "/bam/restrito/manterAutor/consulta.xhtml";
+    protected static final String TELA_INCLUSAO_AUTOR = "/bam/restrito/manterAutor/novo.xhtml";
 
-    protected static final String TELA_INCLUSAO_OBRA = "/restrito/manterObra/novo";
+    protected static final String TELA_INCLUSAO_OBRA = "/bam/restrito/manterObra/novo.xhtml";
 
     protected void adicionaMensagemInfo(InfoException info) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, Constantes.SUCESSO, info.getMessage()));
