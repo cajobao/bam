@@ -1,0 +1,129 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:decorate template="/layout.xhtml">
+        <ui:define name="centro">
+            <h:form id="formInclusaoEmprestimo" prependId="false">
+                <p:panel id="painelInclusaoEmprestimo" header="Emprestimo - Cadastro" style="margin-bottom:20px">
+                    <p:tabView prependId="false" activeIndex="#{emprestimoBean.abaAtiva}">
+                        <p:tab title="Pessoa" id="abaPessoaInclusao">
+                            <p:panelGrid styleClass="form-cadastro">
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="* " class="campo-obrigatorio"/>
+                                        <p:outputLabel value="Tipo"/>
+                                        <p:selectOneMenu value="#{emprestimoBean.pessoaConsulta.tipoPessoa.idTipoPessoa}" >
+                                            <f:selectItem itemValue="" itemLabel=""/>
+                                            <f:selectItems value="#{emprestimoBean.tiposPessoa}" var="tp" itemValue="#{tp.idTipoPessoa}" itemLabel="#{tp.nmTipoPessoa}"/>
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="Matrícula"/>
+                                        <p:outputLabel value=": "/>
+                                        <p:inputText id="matricula"
+                                                     size="20"
+                                                     maxlength="20"
+                                                     value="#{emprestimoBean.pessoaConsulta.nrMatricula}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="Nome"/>
+                                        <p:outputLabel value=": "/>
+                                        <p:inputText id="nomePessoa"
+                                                     size="20"
+                                                     maxlength="50"
+                                                     value="#{emprestimoBean.pessoaConsulta.nmPessoa}"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                            <div class="div-botoes-2">
+                                <p:panelGrid columns="2" class="semBordaBotao">
+                                    <p:commandButton icon="ui-icon-search" value="Consultar" action="#{emprestimoBean.consultarPessoa()}" update="listaEmprestimoPessoas"/>
+                                    <p:commandButton icon="ui-icon-refresh" value="Limpar" action="#"/>
+                                </p:panelGrid>
+                            </div>
+                            <p:dataTable id="listaEmprestimoPessoas" var="pessoa" value="#{emprestimoBean.pessoas}" rowKey="#{pessoa.idPessoa}" selection="#{emprestimoBean.pessoaEmprestimo}" emptyMessage="" class="form-cadastro-meio">
+                                <p:column selectionMode="single" style="width: 19px; margin: auto;" />
+                                <p:column headerText="Matrícula" style="width: 100px">#{pessoa.nrMatricula}</p:column>
+                                <p:column headerText="Nome">#{pessoa.nmPessoa}</p:column>
+                            </p:dataTable>
+                        </p:tab>
+                        <p:tab title="Obra" id="abaObraInclusao">
+                            <p:panelGrid class="form-cadastro">
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Tipo: "/>
+                                        <p:selectOneMenu value="#{obraBean.tipoObra.idTipoObra}" >
+                                            <f:selectItem itemValue="" itemLabel=""/>
+                                            <f:selectItems value="#{obraBean.tiposDeObra}" var="to" itemValue="#{to.idTipoObra}" itemLabel="#{to.nmTipoObra}"/>
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="Editora: "/>
+                                        <p:selectOneMenu value="#{obraBean.editora.idEditora}">
+                                            <f:selectItem itemValue="" itemLabel=""/>
+                                            <f:selectItems value="#{obraBean.editoras}" var="edit" itemLabel="#{edit.nmEditora}" itemValue="#{edit.idEditora}" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="Autor: "/>
+                                        <p:selectOneMenu value="#{obraBean.autor.idAutor}" >
+                                            <f:selectItem itemValue="" itemLabel=""/>
+                                            <f:selectItems value="#{obraBean.autores}" var="aut" itemValue="#{aut.idAutor}" itemLabel="#{aut.nmAutor}"/>
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="Título: "/>
+                                        <p:inputText id="nomeObra"
+                                                     size="20"
+                                                     maxlength="50"
+                                                     value="#{obraBean.obra.dsTitulo}"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                            <div class="div-botoes-2">
+                                <p:panelGrid columns="2" styleClass="semBordaBotao">
+                                    <p:commandButton icon="ui-icon-search" value="Consultar" action="#{obraBean.consultar()}" update="listaObras"/>
+                                    <p:commandButton icon="ui-icon-refresh" value="Limpar" action="#"/>
+                                </p:panelGrid>
+                            </div>
+                            <p:dataTable id="listaObras" var="obra" value="#{obraBean.obras}" rowKey="#{obra.idObra}" selection="#{emprestimoBean.obraEmprestimo}" class="form-cadastro-meio" emptyMessage="">
+                                <p:column selectionMode="single" style="width: 19px; margin: auto;" />
+                                <p:column headerText="Tipo">#{obra.tipoObra.nmTipoObra}</p:column>
+                                <p:column headerText="Titulo">#{obra.dsTitulo}</p:column>
+                                <p:column headerText="Editora">#{obra.editora.nmEditora}</p:column>
+                                <p:column headerText="Autor">#{obra.autor.nmAutor}</p:column>
+                                <p:column headerText="Qtd Exemplares">#{obra.qtdExemplares}</p:column>
+                            </p:dataTable>
+                            <div class="div-botoes-1">
+                                <p:panelGrid columns="1" styleClass="semBordaBotao">
+                                    <p:commandButton value="Adicionar" action="#{emprestimoBean.adicionarObra()}" update="listaObrasSelectionadas"/>
+                                </p:panelGrid>
+                            </div>
+                            <p:dataTable id="listaObrasSelectionadas" var="obraSelecionada" value="#{emprestimoBean.obras}" rowKey="#{obraSelecionada.idObra}" selection="#{emprestimoBean.obraRemovida}"  emptyMessage="" class="form-cadastro-meio">
+                                <p:column selectionMode="single" style="width: 19px; margin: auto;" />
+                                <p:column headerText="Tipo">#{obraSelecionada.tipoObra.nmTipoObra}</p:column>
+                                <p:column headerText="Titulo">#{obraSelecionada.dsTitulo}</p:column>
+                                <p:column headerText="Editora">#{obraSelecionada.editora.nmEditora}</p:column>
+                                <p:column headerText="Autor">#{obraSelecionada.autor.nmAutor}</p:column>
+                                <p:column headerText="Qtd Exemplares">#{obraSelecionada.qtdExemplares}</p:column>
+                            </p:dataTable>
+                            <div class="div-botoes-1">
+                                <p:panelGrid columns="1" styleClass="semBordaBotao">
+                                    <p:commandButton value="Remover" action="#{emprestimoBean.removerObra()}" update="listaObrasSelectionadas"/>
+                                </p:panelGrid>
+                            </div>
+                        </p:tab>
+                    </p:tabView>
+                    <div class="div-botoes-1">
+                        <p:panelGrid columns="1" styleClass="semBordaBotao">
+                            <p:commandButton value="Confirmar" action="#{emprestimoBean.confirmar()}"/>
+                        </p:panelGrid>
+                    </div>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:decorate>
+</html>

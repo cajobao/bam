@@ -6,45 +6,67 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:decorate template="/layout.xhtml">
         <ui:define name="centro">
-            <h:form>
-                <h:panelGrid columns="8" cellspacing="5" >
-                    <h:outputLabel value="Tipo: "/>
-                    <h:selectOneMenu value="#{obraBean.obra.tipoObra.idTipoObra}" >
-                        <f:selectItem itemValue="" itemLabel=""/>
-                        <f:selectItems value="#{obraBean.tiposDeObra}" var="to" itemValue="#{to.idTipoObra}" itemLabel="#{to.nmTipoObra}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="Editora: "/>
-                    <h:selectOneMenu value="#{obraBean.obra.editora.idEditora}">
-                        <f:selectItem itemValue="" itemLabel=""/>
-                        <f:selectItems value="#{obraBean.editoras}" var="edit" itemLabel="#{edit.nmEditora}" itemValue="#{edit.idEditora}" />
-                    </h:selectOneMenu>
-                    <h:outputLabel value="Autor: "/>
-                    <h:selectOneMenu value="#{obraBean.obra.autor.idAutor}" >
-                        <f:selectItem itemValue="" itemLabel=""/>
-                        <f:selectItems value="#{obraBean.autores}" var="aut" itemValue="#{aut.idAutor}" itemLabel="#{aut.nmAutor}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="Título: "/>
-                    <h:inputText id="nome"
-                                 size="20"
-                                 maxlength="50"
-                                 value="#{obraBean.obra.dsTitulo}"/>
-                </h:panelGrid>
-                <div class="div-botoes">
-                    <h:panelGrid columns="3">
-                        <h:commandButton value="Consultar" action="#{obraBean.consultar()}"/>
-                        <h:commandButton value="Limpar" action="#"/>
-                        <h:commandButton value="Novo" action="#{obraBean.abrirFormInclusao()}" rendered="#{loginBean.usuarioLogado != null}"/>
-                    </h:panelGrid>
-                </div>
-                <c:if test="#{obraBean.obras.size() > 0}">
-                    <p:dataTable id="lista" var="obra" value="#{obraBean.obras}">
-                        <p:column headerText="Tipo">#{obra.tipoObra.nmTipoObra}</p:column>
-                        <p:column headerText="Titulo">#{obra.dsTitulo}</p:column>
-                        <p:column headerText="Editora">#{obra.editora.nmEditora}</p:column>
-                        <p:column headerText="Autor">#{obra.autor.nmAutor}</p:column>
-                        <p:column headerText="Qtd Exemplares">#{obra.qtdExemplares}</p:column>
-                    </p:dataTable>
-                </c:if>
+            <h:form id="formConsultaObras" prependId="false">
+                <p:panel id="painelConsultaObras" header="Obra - Consulta" style="margin-bottom:20px">
+                    <p:panelGrid styleClass="form-cadastro">
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="Tipo"/>
+                                <p:selectOneMenu value="#{obraBean.tipoObra.idTipoObra}" >
+                                    <f:selectItem itemValue="" itemLabel=""/>
+                                    <f:selectItems value="#{obraBean.tiposDeObra}" var="to" itemValue="#{to.idTipoObra}" itemLabel="#{to.nmTipoObra}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="Editora" />
+                                <p:selectOneMenu value="#{obraBean.editora.idEditora}">
+                                    <f:selectItem itemValue="" itemLabel=""/>
+                                    <f:selectItems value="#{obraBean.editoras}" var="edit" itemLabel="#{edit.nmEditora}" itemValue="#{edit.idEditora}" />
+                                </p:selectOneMenu>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="Autor"/>
+                                <p:selectOneMenu value="#{obraBean.autor.idAutor}" >
+                                    <f:selectItem itemValue="" itemLabel=""/>
+                                    <f:selectItems value="#{obraBean.autores}" var="aut" itemValue="#{aut.idAutor}" itemLabel="#{aut.nmAutor}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="Título"/>
+                                <p:inputText id="nome"
+                                             size="20"
+                                             maxlength="50"
+                                             value="#{obraBean.obra.dsTitulo}"/>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </p:panel>
+                <c:choose>
+                    <c:when test="#{loginBean.usuarioLogado != null}">
+                        <div class="div-botoes-3">
+                            <p:panelGrid columns="3" styleClass="semBordaBotao">
+                                <p:commandButton icon="ui-icon-search" value="Consultar" actionListener="#{obraBean.consultar()}" update=":formConsultaObras:listaObrasConsulta"/>
+                                <p:commandButton icon="ui-icon-refresh" value="Limpar" action="#"/>
+                                <p:commandButton icon="ui-icon-document" value="Novo" action="#{obraBean.abrirFormInclusao()}"/>
+                            </p:panelGrid>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="div-botoes-2">
+                            <p:panelGrid columns="3" styleClass="semBordaBotao">
+                                <p:commandButton icon="ui-icon-search" value="Consultar" actionListener="#{obraBean.consultar()}" update=":formConsultaObras:listaObrasConsulta"/>
+                                <p:commandButton icon="ui-icon-refresh" value="Limpar" action="#"/>
+                            </p:panelGrid>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+                <p:dataTable id="listaObrasConsulta" var="obra" value="#{obraBean.obras}" emptyMessage="" class="form-cadastro-meio">
+                    <p:column headerText="Tipo">#{obra.tipoObra.nmTipoObra}</p:column>
+                    <p:column headerText="Titulo">#{obra.dsTitulo}</p:column>
+                    <p:column headerText="Editora">#{obra.editora.nmEditora}</p:column>
+                    <p:column headerText="Autor">#{obra.autor.nmAutor}</p:column>
+                    <p:column headerText="Qtd Exemplares" style="text-align: center;">#{obra.qtdExemplares}</p:column>
+                </p:dataTable>
             </h:form>
         </ui:define>
     </ui:decorate>

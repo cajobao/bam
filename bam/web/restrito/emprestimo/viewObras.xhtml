@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Obras</title>
+        <style type="text/css">
+            .ui-widget {
+                font-size: 90%;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <p:dataTable var="obra" value="#{popupBean.obrasEmprestimo}">
+            <p:column headerText="Tipo">
+                <h:outputText value="#{obra.tipoObra.nmTipoObra}" />
+            </p:column>
+            <p:column headerText="Título">
+                <h:outputText value="#{obra.dsTitulo}" />
+            </p:column>
+            <p:column headerText="Autor">
+                <h:outputText value="#{obra.autor.nmAutor}" />
+            </p:column>
+            <p:column headerText="Editora">
+                <h:outputText value="#{obra.editora.nmEditora}" />
+            </p:column>
+        </p:dataTable>
+        <p:dataTable id="listaObrasConsulta" var="obra" value="#{popupBean.obrasEmprestimo}" emptyMessage="" class="form-cadastro-meio">
+            <p:column headerText="Tipo">#{obra.tipoObra.nmTipoObra}</p:column>
+            <p:column headerText="Titulo">#{obra.dsTitulo}</p:column>
+            <p:column headerText="Editora">#{obra.editora.nmEditora}</p:column>
+            <p:column headerText="Autor">#{obra.autor.nmAutor}</p:column>
+            <p:column headerText="Qtd Exemplares" style="text-align: center;">#{obra.qtdExemplares}</p:column>
+        </p:dataTable>
+    </h:body>
+</html>

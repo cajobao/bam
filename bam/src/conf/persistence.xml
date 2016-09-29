@@ -10,7 +10,7 @@
         <properties>
             <!-- dados da conexao -->
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/aulabd" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/desenv" />
             <property name="javax.persistence.jdbc.user" value="postgres" />
             <property name="javax.persistence.jdbc.password" value="12345678" />
             <!--  propriedades do hibernate -->
@@ -18,7 +18,7 @@
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
             <property name="hibernate.archive.autodetection" value="class" />
-            <property name="hibernate.connection.autocommit" value="true"/>  
+<!--            <property name="hibernate.connection.autocommit" value="true"/>  -->
         </properties>
     </persistence-unit>
     <persistence-unit name="bam_homologacao">

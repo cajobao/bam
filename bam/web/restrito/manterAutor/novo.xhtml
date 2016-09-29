@@ -6,29 +6,30 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <ui:decorate template="/layout.xhtml">
         <ui:define name="centro">
-            <h4>Incluir</h4>
             <h:form>
-                <h:panelGrid columns="3">
-                    <h:outputLabel value="Nome: "/>
-                    <h:inputText id="nome"
-                                 size="20"
-                                 maxlength="50"
-                                 value="#{autorBean.autor.nmAutor}"
-                                 required="true"
-                                 requiredMessage="O campo nome é obrigatório !"/>
-                </h:panelGrid>
-                <div class="div-botoes">
-                    <h:panelGrid columns="3">
-                        <h:commandButton value="Cadastrar" action="#{autorBean.salvar()}"/>
-                        <h:commandButton value="Limpar" action="#{autorBean.limpar()}"/>
-                        <h:commandButton value="Voltar" action="manterAutor/consultar"/>
-                    </h:panelGrid>
+                <p:panel id="basic" header="Autor - Inclusão" style="margin-bottom:20px">
+                    <div class="form-cadastro">
+                        <p:panelGrid class="form-cadastro">
+                            <p:row>
+                                <p:column>
+                                    <p:outputLabel value="* " class="campo-obrigatorio"/>
+                                    <p:outputLabel value="Nome"/>
+                                    <p:inputText id="nome"
+                                                 size="20"
+                                                 maxlength="50"
+                                                 value="#{autorBean.autorInclusao.nmAutor}"/>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                    </div>
+                </p:panel>
+                <div class="div-botoes-3">
+                    <p:panelGrid columns="3" class="semBordaBotao">
+                        <p:commandButton icon="ui-icon-check" value="Cadastrar" actionListener="#{autorBean.incluir()}"/>
+                        <p:commandButton icon="ui-icon-refresh" value="Limpar" action="#{autorBean.limpar()}"/>
+                        <p:commandButton icon="ui-icon-arrowreturnthick-1-w" value="Voltar" action="/restrito/manterAutor/consulta"/>
+                    </p:panelGrid>
                 </div>
-                <c:if test="#{autorBean.autores.size() > 0}">
-                    <p:dataTable id="lista" var="aut" value="#{autorBean.autores}" emptyMessage="Nenhum registro encontrado" >
-                        <p:column headerText="Nome">#{aut.nmAutor}</p:column>
-                    </p:dataTable>
-                </c:if>
             </h:form>
         </ui:define>
     </ui:decorate>

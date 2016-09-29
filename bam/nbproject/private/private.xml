@@ -3,21 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Jacob%20Vilar/Documents/NetBeansProjects/bam/src/java/dados/entidade/Usuario.java</file>
-            <file>file:/C:/Users/Jacob%20Vilar/Documents/NetBeansProjects/bam/src/java/beans/AutorBean.java</file>
-            <file>file:/C:/Users/Jacob%20Vilar/Documents/NetBeansProjects/bam/src/java/dados/entidade/Editora.java</file>
-            <file>file:/C:/Users/Jacob%20Vilar/Documents/NetBeansProjects/bam/src/java/dados/dao/AlunoDAO.java</file>
-            <file>file:/C:/Users/Jacob%20Vilar/Documents/NetBeansProjects/bam/src/java/exception/GenericaException.java</file>
-            <file>file:/C:/Users/Jacob%20Vilar/Documents/NetBeansProjects/bam/src/java/Filter/LoginFilter.java</file>
-            <file>file:/C:/Users/Jacob%20Vilar/Documents/NetBeansProjects/bam/web/layout.xhtml</file>
-            <file>file:/C:/Users/Jacob%20Vilar/Documents/NetBeansProjects/bam/src/java/negocio/AutorBO.java</file>
-            <file>file:/C:/Users/Jacob%20Vilar/Documents/NetBeansProjects/bam/src/java/dados/dao/UsuarioDAO.java</file>
-            <file>file:/C:/Users/Jacob%20Vilar/Documents/NetBeansProjects/bam/src/java/Util/Constantes.java</file>
-            <file>file:/C:/Users/Jacob%20Vilar/Documents/NetBeansProjects/bam/src/java/beans/LoginBean.java</file>
-            <file>file:/C:/Users/Jacob%20Vilar/Documents/NetBeansProjects/bam/src/java/Session/SessionContext.java</file>
-            <file>file:/C:/Users/Jacob%20Vilar/Documents/NetBeansProjects/bam/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Jacob%20Vilar/Documents/NetBeansProjects/bam/src/java/beans/BeanAbstrato.java</file>
-            <file>file:/C:/Users/Jacob%20Vilar/Documents/NetBeansProjects/bam/src/java/exception/InfoException.java</file>
+            <file>file:/C:/Users/Jacob%20Vilar/Documents/GitHub/bam/bam/src/java/br/iesb/bam/negocio/LoginBO.java</file>
+            <file>file:/C:/Users/Jacob%20Vilar/Documents/GitHub/bam/bam/src/java/br/iesb/bam/negocio/UsuarioBO.java</file>
+            <file>file:/C:/Users/Jacob%20Vilar/Documents/GitHub/bam/bam/src/java/br/iesb/bam/dados/dao/UsuarioDAO.java</file>
+            <file>file:/C:/Users/Jacob%20Vilar/Documents/GitHub/bam/bam/src/java/br/iesb/bam/util/HibernateUtil.java</file>
+            <file>file:/C:/Users/Jacob%20Vilar/Documents/GitHub/bam/bam/src/java/br/iesb/bam/dados/entidade/Usuario.java</file>
+            <file>file:/C:/Users/Jacob%20Vilar/Documents/GitHub/bam/bam/src/java/br/iesb/bam/negocio/PessoaBO.java</file>
+            <file>file:/C:/Users/Jacob%20Vilar/Documents/GitHub/bam/bam/src/java/br/iesb/bam/dados/entidade/Pessoa.java</file>
+            <file>file:/C:/Users/Jacob%20Vilar/Documents/GitHub/bam/bam/test/UsuarioTest.java</file>
+            <file>file:/C:/Users/Jacob%20Vilar/Documents/GitHub/bam/bam/src/conf/persistence.xml</file>
         </group>
     </open-files>
 </project-private>

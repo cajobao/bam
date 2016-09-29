@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:decorate template="/layout.xhtml">
+        <ui:define name="centro">
+            <h:form id="formConsultaEditora">
+                <p:panel id="painelConsultaEditora" header="Editora - Consulta" style="margin-bottom:20px">
+                    <div class="form-cadastro">
+                        <p:panelGrid class="form-cadastro">
+                            <p:row>
+                                <p:column>
+                                    <p:outputLabel value="* " class="campo-obrigatorio"/>
+                                    <p:outputLabel value="Nome"/>                       
+                                    <p:inputText id="nome"
+                                                 size="20"
+                                                 maxlength="50"
+                                                 value="#{editoraBean.editoraConsulta.nmEditora}"/>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                    </div>
+                </p:panel>
+                <div class="div-botoes-3">
+                    <p:panelGrid class="semBordaBotao" columns="3">
+                        <p:commandButton icon="ui-icon-search" value="Consultar" action="#{editoraBean.consultar()}" update=":formConsultaEditora:listaEditoras"/>
+                        <p:commandButton icon="ui-icon-refresh" value="Limpar" action="#{editoraBean.limpar()}"/>
+                        <p:commandButton icon="ui-icon-document" value="Novo" action="/restrito/manterEditora/novo"/>
+                    </p:panelGrid>
+                </div>
+                <p:dataTable id="listaEditoras" var="edit" value="#{editoraBean.editoras}" rowKey="#{edit.idEditora}" selection="#{editoraBean.editoraExclusao}" emptyMessage="" class="form-cadastro-meio">
+                    <p:column selectionMode="single" style="width: 19px; margin: auto;"/>
+                    <p:column headerText="Nome">#{edit.nmEditora}</p:column>
+                </p:dataTable>
+                <div class="div-botoes-1">
+                    <p:commandButton icon="ui-icon-trash" value="Exlcuir" action="#{editoraBean.excluir()}" update=":formConsultaEditora:listaEditoras" disabled="#{empty editoraBean.editoraExclusao}"/>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:decorate>
+</html>

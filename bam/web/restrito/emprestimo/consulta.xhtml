@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <ui:decorate template="/layout.xhtml">
+        <ui:define name="centro">
+            <h:form id="formConsultaEmprestimo" prependId="false">
+                <p:panel id="painelConsultaEmprestimo" header="Emprestimo - Consulta" style="margin-bottom:20px">
+                    <p:tabView prependId="false" id="abas" activeIndex="#{emprestimoBean.abaAtiva}">
+                        <p:tab title="Pessoa" id="abaPessoaConsulta">
+                            <p:panelGrid styleClass="form-cadastro">
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Nome"/>
+                                        <p:outputLabel value=": "/>
+                                        <p:inputText value="#{emprestimoBean.pessoaConsulta.nmPessoa}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="Matrícula"/>
+                                        <p:outputLabel value=": "/>
+                                        <p:inputText value="#{emprestimoBean.pessoaConsulta.nrMatricula}"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab title="Obra" id="abaObra">
+                            <p:panelGrid styleClass="form-cadastro">
+                                <p:row>
+                                    <p:column>
+                                        <p:outputLabel value="Tipo"/>
+                                        <p:outputLabel value=": "/>
+                                        <p:selectOneMenu id="tipoObra" value="#{emprestimoBean.obraConsulta.tipoObra.idTipoObra}" style="width:125px">
+                                            <f:selectItem itemLabel="" itemValue="" />
+                                            <f:selectItems value="#{emprestimoBean.tiposObra}" var="to" itemValue="#{to.idTipoObra}" itemLabel="#{to.nmTipoObra}"/>
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column>
+                                        <p:outputLabel value="Título"/>
+                                        <p:outputLabel value=": "/>
+                                        <p:inputText value="#{emprestimoBean.obraConsulta.dsTitulo}"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+                </p:panel>
+                <div class="div-botoes-2">
+                    <p:panelGrid columns="2" styleClass="semBordaBotao">
+                        <p:commandButton icon="ui-icon-search" action="#{emprestimoBean.consultar()}" update=":formConsultaEmprestimo:listaEmprestimoConsulta" value="Consultar"/>
+                        <p:commandButton icon="ui-icon-document" action="#{emprestimoBean.abrirFormInclusao()}" value="Novo"/>
+                    </p:panelGrid>
+                </div>
+                <p:dataTable var="emp" value="#{emprestimoBean.emprestimos}" id="listaEmprestimoConsulta" emptyMessage="" class="form-cadastro-meio">
+                    <p:column headerText="Tipo pessoa" style="width: 10%;">
+                        <h:outputText value="#{emp.pessoa.tipoPessoa.nmTipoPessoa}" />
+                    </p:column>
+                    <p:column headerText="Matrícula" style="text-align: center">
+                        <h:outputText value="#{emp.pessoa.nrMatricula}" />
+                    </p:column>
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{emp.pessoa.nmPessoa}" />
+                    </p:column>
+                    <p:column headerText="Empréstimo" style="text-align: center">
+                        <h:outputText value="#{emp.dtEmprestimo}">
+                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Devolução" style="text-align: center">
+                        <h:outputText value="#{emp.dtDevolucao}">
+                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Obras" width="45">
+                        <p:commandButton action="#{popupBean.abrirPopup('/restrito/emprestimo/viewObras')}" icon="ui-icon-search">
+                            <f:setPropertyActionListener value="#{emp.obras}" target="#{popupBean.obrasEmprestimo}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:decorate>
+</html>

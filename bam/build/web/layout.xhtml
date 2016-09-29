@@ -4,15 +4,21 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
+    <ui:define name="metadata">
+
+    </ui:define>
+
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Biblioteca Assis do Machado</title>
+        <link rel="icon" type="image/png" href="imagem/favicon.png"/>
         <style type="text/css">
             body {
                 background-color: #eeeeee; 
-                font-size: 12px
+                font-size: 12px;
+                font-family: sans-serif ;
             }
-            .div-botoes{
+            .div-botoes-1{
                 background    :#f7f7f7;
                 border-top    :1px dashed #ccc;
                 border-bottom :1px dashed #ccc;
@@ -21,37 +27,93 @@
                 text-align    :right;
 
             }
-            .div-botoes > *{
-                margin-left: 78%;
+
+            .div-botoes-2{
+                background    :#f7f7f7;
+                border-top    :1px dashed #ccc;
+                border-bottom :1px dashed #ccc;
+                margin-top    :20px;
+                padding       :5px;
+                text-align    :right;
+
+            }
+            .div-botoes-3{
+                background    :#f7f7f7;
+                border-top    :1px dashed #ccc;
+                border-bottom :1px dashed #ccc;
+                margin-top    :20px;
+                padding       :5px;
+                text-align    :right;
+
+            }
+            .div-botoes-1 > *{
+                margin-left: 87%;
+            }
+            .div-botoes-2 > *{
+                margin-left: 77%;
+            }
+            .div-botoes-3 > *{
+                margin-left: 67%;
+            }
+            .titulo-pagina {
+                margin-right: 88%; 
+                font-size: 20px;
+            }
+            .form-cadastro {
+                margin-right: 70%;
+            }
+            .form-cadastro tr, .form-cadastro td {
+                border: none !important;
+            }
+            .form-cadastro-meio {
+                margin-top: 20px;
+            }
+            .campo-obrigatorio {
+                color: red;
+            }
+            #geral {
+                text-align: left;
+                padding-left: 50px;
+            }
+            #livro {
+                text-align: left;
+                padding-left: 50px;
+            }
+            #periodico {
+                text-align: left;
+                padding-left: 50px;
+            }
+            #enciclopedia {
+                text-align: left;
+                padding-left: 50px;
+            }
+            .semBordaBotao tr, .semBordaBotao td {  
+                border: none !important;
+                background    :#f7f7f7;
             }
         </style>
     </h:head>
     <h:body>
         <div align="center">
-            <p:layout style="min-width:1020px;max-width:1020px;min-height:600px">  
-                <!--                <p:layoutUnit position="north" size="100">  
-                                    <h:graphicImage url="/tema/imagens/topo.jpg" />
-                                </p:layoutUnit>  -->
+            <p:layout style="min-width:1020px;max-width:1020px;min-height:700px">  
                 <p:layoutUnit position="center" size="100">  
                     <ui:insert name="menu">
-                        <h:form>  
+                        <h:form id="formTemplate" prependId="false">  
                             <p:menubar>
+                                <p:menuitem icon="ui-icon-home" action="#{obraBean.abrirFormConsulta()}" rendered="#{loginBean.usuarioLogado != null}"/>
                                 <p:submenu label="Cadastro" rendered="#{loginBean.usuarioLogado != null}">
-                                    <p:menuitem value="Manter Autor" action="#{autorBean.abrirFormConsulta()}" />
-                                    <p:menuitem value="Manter Editora" action="#"/>
-                                    <p:menuitem value="Manter Obras" action="#"/>
+                                    <p:menuitem value="Manter Autor" url="/restrito/manterAutor/consulta.xhtml" />
+                                    <p:menuitem value="Manter Editora" url="/restrito/manterEditora/consulta.xhtml"/>
+                                    <p:menuitem value="Manter Obras" url="/restrito/manterObra/novo.xhtml"/>
                                     <p:menuitem value="Manter Novas Obras" action="#"/>
                                 </p:submenu>
                                 <p:submenu label="Emprestimo" rendered="#{loginBean.usuarioLogado != null}">
-                                    <p:menuitem value="Consultar" url="#" />
-                                    <p:menuitem value="Novo" url="#"/>
-                                    <p:menuitem value="Reserva" url="#" />
+                                    <p:menuitem value="Consulta" url="/restrito/emprestimo/consulta.xhtml"/>
+                                    <p:menuitem value="Novo" url="/restrito/emprestimo/novo.xhtml"/>
+                                    <p:menuitem value="Reserva" url="/restrito/emprestimo/reserva.xhtml" />
                                 </p:submenu>
-                                <p:submenu label="Obras">
-                                    <p:menuitem value="Consultar" action="#{obraBean.abrirFormConsulta()}" />
-                                </p:submenu>
-                                <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginBean.sair()}" rendered="#{loginBean.usuarioLogado != null}"/>
-                                <p:menuitem value="Entrar" icon="ui-icon-open" url="/publico/login.xhtml" rendered="#{loginBean.usuarioLogado == null}"/>
+                                <p:menuitem value="Sair" icon="ui-icon-closethick" action="#{loginBean.sair()}" rendered="#{loginBean.usuarioLogado != null}"/>
+                                <p:menuitem value="Entrar" icon="ui-icon-key" url="/publico/login.xhtml" rendered="#{loginBean.usuarioLogado == null}"/>
                             </p:menubar>
                             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                         </h:form>
